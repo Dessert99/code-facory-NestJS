@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    // Node.js의 최신 모듈 시스템(ESM/CJS 통합)에 맞춰 코드를 생성합니다.
+    "module": "nodenext",
+    // 모듈을 찾을 때 Node.js의 최신 해석 방식(package.json의 exports 등)을 따릅니다.
+    "moduleResolution": "nodenext",
+    // package.json의 "exports" 필드를 참조하여 모듈 경로를 엄격하게 해석합니다.
+    "resolvePackageJsonExports": true,
+    // CommonJS 모듈을 ES6 모듈 사양(import)으로 문제없이 불러오게 호환성을 제공합니다.
+    "esModuleInterop": true,
+    // 각 파일을 독립된 모듈로 변환 가능하게 하여, 단일 파일 트랜스파일러(SWC 등)와 호환성을 높입니다.
+    "isolatedModules": true,
+    // 라이브러리 배포 등에 필요한 타입 정의 파일(.d.ts)을 생성합니다.
+    "declaration": true,
+    // 컴파일된 결과물 자바스크립트 파일에서 주석을 제거합니다.
+    "removeComments": true,
+    // 데코레이터를 쓴 곳의 타입 정보를 런타임에 제공합니다 (NestJS 의존성 주입의 핵심).
+    "emitDecoratorMetadata": true,
+    // 실험적 기능인 데코레이터 문법 사용을 활성화합니다 (NestJS 필수).
+    "experimentalDecorators": true,
+    // default export가 없는 모듈도 import x from 'y' 문법으로 불러올 수 있게 허용합니다.
+    "allowSyntheticDefaultImports": true,
+    // 변환된 자바스크립트 코드가 따를 문법 버전을 ES2023으로 설정합니다.
+    "target": "ES2023",
+    // 디버깅 시 컴파일된 코드와 원본 코드를 연결해주는 소스 맵 파일을 생성합니다.
+    "sourceMap": true,
+    // 컴파일된 결과 파일들이 저장될 폴더 경로입니다.
+    "outDir": "./dist",
+    // 모듈을 절대 경로로 불러올 때의 기준점이 되는 루트 경로를 설정합니다.
+    "baseUrl": "./",
+    // 이전 컴파일 정보를 디스크에 저장하여 다음 빌드 속도를 빠르게 합니다 (증분 빌드).
+    "incremental": true,
+    // node_modules 등의 라이브러리 정의 파일(.d.ts)에 대한 타입 검사를 생략하여 속도를 높입니다.
+    "skipLibCheck": true,
+    // null과 undefined를 별도 타입으로 취급하여 예기치 않은 참조 에러를 방지합니다.
+    "strictNullChecks": true,
+    // 파일명 참조 시 대소문자가 디스크의 실제 파일명과 정확히 일치하도록 강제합니다.
+    "forceConsistentCasingInFileNames": true,
+    // 타입을 명시하지 않아 암묵적으로 'any'가 되는 변수를 허용합니다 (권장되진 않음).
+    "noImplicitAny": false,
+    // 함수 내장 메서드인 bind, call, apply에 대한 엄격한 타입 검사를 끕니다.
+    "strictBindCallApply": false,
+    // switch 문에서 break 없이 다음 case로 넘어가는(fallthrough) 코드를 허용합니다.
+    "noFallthroughCasesInSwitch": false
+  }
+}
