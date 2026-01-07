@@ -34,14 +34,14 @@ export default tseslint.config(
   },
   {
     rules: {
+      // 쓸데없는 빨간줄 제거
+      'prettier/prettier': 'off',
       // 'any' 타입 사용을 금지하는 규칙을 끕니다 (any 사용 허용).
       '@typescript-eslint/no-explicit-any': 'error',
       // 비동기 함수(Promise)를 호출하고 await나 처리를 안 했을 때 경고를 띄웁니다.
       '@typescript-eslint/no-floating-promises': 'warn',
       // 'any' 타입인 값을 함수 인자로 넘길 때 경고를 띄웁니다 (타입 안전성 경고).
       '@typescript-eslint/no-unsafe-argument': 'warn',
-      // Prettier 포맷팅 위반을 에러로 처리하며, OS별 줄바꿈 문자(LF/CRLF) 차이를 무시(auto)합니다.
-      'prettier/prettier': ['error', { endOfLine: 'auto' }],
     },
   },
 );
