@@ -1,48 +1,13 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
-  NotFoundException,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-
-interface PostModel {
-  id: number;
-  author: string;
-  title: string;
-  content: string;
-  likeCount: number;
-  commentCount: number;
-}
-
-let posts: PostModel[] = [
-  {
-    id: 1,
-    author: 'newoffilc',
-    title: '뉴민스 민지',
-    content: '안녕',
-    commentCount: 12,
-    likeCount: 25,
-  },
-  {
-    id: 2,
-    author: 'newoffilc',
-    title: '떡볶이',
-    content: '안녕야ㅣ더루니ㅑㄷ',
-    commentCount: 1245,
-    likeCount: 22145,
-  },
-  {
-    id: 3,
-    author: '이랴ㅓㄷ리ㅑㅓ ',
-    title: 'ㅇ두댜니',
-    content: 'ㅣㅑㅓㅣㅑㅓ',
-    commentCount: 12202,
-    likeCount: 2295,
-  },
-];
 
 @Controller('posts')
 export class PostsController {
@@ -51,20 +16,14 @@ export class PostsController {
   // GET /posts
   @Get()
   getPosts() {
-    return posts;
+    return this.postsService.getAllPosts();
   }
 
   // GET /posts/:id
   @Get(':id')
   // URL에 있는 'id' 값을 추출해서 매개변수 id에 할당
   getPost(@Param('id') id: string) {
-    const post = posts.find((post) => post.id === +id);
-
-    if (!post) {
-      throw new NotFoundException(); // 찾는 게시글이 없으면 예외 에러 (404)
-    }
-
-    return post;
+    return this.postsService.getPostById(Number(id));
   }
 
   // POST /posts
@@ -75,21 +34,23 @@ export class PostsController {
     @Body('title') title: string,
     @Body('content') content: string,
   ) {
-    const post = {
-      id: posts[posts.length - 1].id + 1, //마지막 게시글 id + 1
-      author,
-      title,
-      content,
-      likeCount: 0,
-      commentCount: 0,
-    };
-
-    posts = [...posts, post];
-
-    return post;
+    return this.postsService.createPost(author, title, content);
   }
 
   // PUT /posts/:id
+  @Put(':id')
+  putPost(
+    @Param('id') id: string,
+    @Body('author') author?: string, // 옵셔널 -> 수정할 수도 있고 안할 수도 있다.
+    @Body('title') title?: string,
+    @Body('content') content?: string,
+  ) {
+    return this.postsService.upDatePost(+id, author, title, content);
+  }
 
   // DELETE /posts/:id
+  @Delete(':id')
+  deletePost(@Param('id') id: string) {
+    return this.postsService.deletePost(+id);
+  }
 }
